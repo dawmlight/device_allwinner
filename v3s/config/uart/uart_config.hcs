@@ -1,0 +1,22 @@
+root {
+    module = "v3s_uart";
+    platform {
+        template uart_controller {
+            match_attr = "";
+            num = 0;
+            baudrate = 115200;
+            fifoRxEn = 1;
+            fifoTxEn = 1;
+            flags = 4;
+            regPbase = 0x12040000;
+            interrupt = 39;
+            iomemCount = 0x48;
+        }
+        controller_0x12040000 :: uart_controller {
+            num = 0;
+            regPbase = 0x01c28000;
+            interrupt = 32;
+            match_attr = "hisilicon_hi35xx_uart_0";
+        }
+    }
+}
