@@ -1,32 +1,5 @@
-diff --git a/Kconfig b/Kconfig
-index 50750d1..e7be3a3 100755
---- a/Kconfig
-+++ b/Kconfig
-@@ -42,11 +42,11 @@ choice
- 
- config COMPILER_HIMIX_32
-     bool "arm-linux-ohoseabi"
--    depends on PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300 || PLATFORM_QEMU_ARM_VIRT_CA7
-+    depends on PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300 || PLATFORM_QEMU_ARM_VIRT_CA7 || PLATFORM_ALLWINNER_V3S
- 
- config COMPILER_CLANG_LLVM
-     bool "clang-llvm"
--    depends on PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300 || PLATFORM_QEMU_ARM_VIRT_CA7
-+    depends on PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300 || PLATFORM_QEMU_ARM_VIRT_CA7 || PLATFORM_ALLWINNER_V3S
- 
- endchoice
- endmenu
-@@ -285,7 +285,7 @@ config VM_OVERLAP_CHECK
- config NULL_ADDRESS_PROTECT
-     bool "Enable NULL Address protect"
-     default n
--    depends on (PLATFORM_HI3518EV200 || PLATFORM_HI3516CV300 || PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300 || PLATFORM_QEMU_ARM_VIRT_CA7) && DEBUG_VERSION
-+    depends on (PLATFORM_HI3518EV200 || PLATFORM_HI3516CV300 || PLATFORM_HI3518EV300 || PLATFORM_HI3516DV300 || PLATFORM_QEMU_ARM_VIRT_CA7 || PLATFORM_ALLWINNER_V3S) && DEBUG_VERSION
-     help
-       Answer Y to set mem address 0~1M prohibit to access, read or write will trigger exception.
- 
 diff --git a/platform/Kconfig b/platform/Kconfig
-index 5f6e78c..4fe7b96 100755
+index 5f6e78c..4fe7b96 100644
 --- a/platform/Kconfig
 +++ b/platform/Kconfig
 @@ -3,6 +3,7 @@ config PLATFORM
@@ -74,16 +47,3 @@ index 5f6e78c..4fe7b96 100755
  endchoice
  
  config BOARD_CONFIG_PATH
-diff --git a/tools/build/mk/los_config.mk b/tools/build/mk/los_config.mk
-index c2166fc..0dc6c26 100755
---- a/tools/build/mk/los_config.mk
-+++ b/tools/build/mk/los_config.mk
-@@ -452,6 +452,8 @@ else
-                 #             problem. "externally_visible" attribute could be
-                 #             a fix for that but it is not known to our LLVM.
-                 LITEOS_COPTS_OPTMIZE = -Oz #-flto
-+        else ifeq ($(LOSCFG_PLATFORM_ALLWINNER_V3S), y)
-+                LITEOS_COPTS_OPTMIZE = -Oz #-flto
-         else
-                 LITEOS_COPTS_OPTMIZE = -Oz -flto
-         endif
