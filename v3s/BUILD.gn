@@ -2,10 +2,5 @@
 
 import("//build/lite/config/component/lite_component.gni")
 
-build_ext_component("v3s_make_kernel") {
-  exec_path = rebase_path("./", root_build_dir)
-  command = "sh ./build.sh ../../../kernel/liteos_a/"
-}
-
 group("v3s") {
 }
