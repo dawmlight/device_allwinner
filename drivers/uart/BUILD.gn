@@ -38,7 +38,3 @@ hdf_driver(module_name) {
     "uart_v3s.c",
   ]
 }
-
-group("uart") {
-  public_deps = [ ":$module_name" ]
-}
